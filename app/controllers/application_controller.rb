@@ -7,4 +7,20 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+    get '/' do
+      erb :index
+    end
+
+    def current_user
+      if !!session[:user_id]
+        User.find_by_id(session[:user_id])
+      else
+        nil
+      end
+    end
+
+    def logged_in?
+      !!current_user
+    end
+
 end
